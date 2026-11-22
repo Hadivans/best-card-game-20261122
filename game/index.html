@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Pact — an elemental card duel</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ TITLE SCREEN ============ -->
+  <section id="title-screen" class="screen">
+    <div class="title-emblems" aria-hidden="true"><span>🔥</span><span>❄️</span><span>🍃</span><span>⛰️</span></div>
+    <h1 class="game-title">EMBER PACT</h1>
+    <p class="tagline">An elemental card duel against <b>Cinder, the Ash Warden</b></p>
+    <p class="tagline-sub">Outwit the warden. Spend your energy. Break the pact — or keep it.</p>
+    <button id="start-btn" class="big-btn">▶&nbsp; Click to Start</button>
+    <button id="howto-btn" class="small-btn">How to Play</button>
+    <div id="howto" class="howto" hidden>
+      <h2>How to Play</h2>
+      <ul>
+        <li><b>Goal:</b> reduce Cinder to <b>0 life</b> before yours hits 0. Both start at 30.</li>
+        <li><b>Each turn</b> your energy refills (more each round, up to 10) and you draw up to 5 cards.</li>
+        <li><b>Click a card</b> to play it if you can pay its energy cost. Keys <b>1–5</b> select a card, <b>Enter</b> ends your turn.</li>
+        <li><b>Element wheel:</b> 🔥 Ember beats 🍃 Leaf beats ❄️ Frost beats ⛰️ Stone beats 🔥 Ember — +2 damage when your element beats Cinder's last played element.</li>
+        <li><b>Surge:</b> play 2 cards of the same element in one turn and the second gains +2.</li>
+        <li><b>Watch the telegraph:</b> Cinder warns you what is coming — Guard against a heavy strike, strike back when Cinder mends.</li>
+        <li><b>Cards:</b> Strike deals damage · Guard gains shield · Mend heals · Spark draws a card.</li>
+      </ul>
+    </div>
+    <div class="legend" aria-label="Elements">
+      <span class="chip el-ember"><i class="shape flame"></i>🔥 Ember</span>
+      <span class="chip el-frost"><i class="shape flake"></i>❄️ Frost</span>
+      <span class="chip el-leaf"><i class="shape leaf"></i>🍃 Leaf</span>
+      <span class="chip el-stone"><i class="shape stone"></i>⛰️ Stone</span>
+    </div>
+    <p class="foot">30 life · 24-card deck · 4 elements · 1 warden to beat</p>
+  </section>
+
+  <!-- ============ TABLE SCREEN ============ -->
+  <section id="table-screen" class="screen" hidden>
+    <header id="hud">
+      <span id="hud-round">Round 1</span>
+      <span id="hud-turn">Your turn</span>
+      <span id="hud-damage">Damage dealt: 0</span>
+      <span id="hud-deck">Deck: 19</span>
+    </header>
+
+    <div id="opponent-row" class="side-row">
+      <div class="avatar foe">🔥</div>
+      <div class="side-info">
+        <div class="side-name">Cinder, the Ash Warden <span id="foe-shield" class="shield-tag" hidden>🛡 0</span></div>
+        <div class="lifebar"><div id="foe-life-fill" class="life-fill foe-fill"></div><span id="foe-life-text" class="life-text">❤ 30 / 30</span></div>
+        <div id="foe-energy" class="energy-row"></div>
+      </div>
+      <div id="foe-hand" class="mini-hand" aria-label="Cinder's hand"></div>
+    </div>
+
+    <div id="telegraph" class="telegraph">Cinder is sizing you up…</div>
+
+    <div id="arena">
+      <div id="foe-played" class="played-slot"><span class="slot-label">Cinder played</span></div>
+      <div id="arena-mid">
+        <div id="log-line">The pact is sealed. Your move.</div>
+        <div id="mid-card"></div>
+      </div>
+      <div id="you-played" class="played-slot"><span class="slot-label">You played</span></div>
+    </div>
+
+    <div id="player-row" class="side-row">
+      <div class="avatar you">🛡️</div>
+      <div class="side-info">
+        <div class="side-name">You — the Pactbreaker <span id="you-shield" class="shield-tag" hidden>🛡 0</span></div>
+        <div class="lifebar"><div id="you-life-fill" class="life-fill you-fill"></div><span id="you-life-text" class="life-text">❤ 30 / 30</span></div>
+        <div id="you-energy" class="energy-row"></div>
+      </div>
+      <div class="hint">Click a card to play it · keys 1–5 select · Enter ends turn</div>
+    </div>
+
+    <div id="hand" class="hand"></div>
+
+    <div id="controls">
+      <button id="end-turn-btn" class="big-btn">End Turn ⏎</button>
+      <span id="surge-note" class="surge-note"></span>
+    </div>
+  </section>
+
+  <!-- ============ END SCREEN ============ -->
+  <section id="end-screen" class="screen" hidden>
+    <div id="end-emblem" class="end-emblem">🏆</div>
+    <h1 id="end-title" class="end-title">VICTORY</h1>
+    <p id="end-sub" class="end-sub"></p>
+    <p id="end-stats" class="end-stats"></p>
+    <button id="again-btn" class="big-btn">↻&nbsp; Play Again</button>
+    <p class="foot">Ember Pact — an original card duel</p>
+  </section>
+
+  <div id="fx"></div>
+</div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
